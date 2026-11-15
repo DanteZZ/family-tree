@@ -1,0 +1,6 @@
+node_modules
+dist
+*.local
+.DS_Store
+# старый прототип одной страницей — не нужен в репозитории
+family-tree.html

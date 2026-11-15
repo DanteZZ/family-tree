@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --line: #c9cfdd; --gap: 26px; color-scheme: light; }
+
+body {
+  @apply font-sans text-ink antialiased;
+  background: radial-gradient(1200px 600px at 10% -10%, #e9ecfb 0%, transparent 60%),
+              radial-gradient(900px 500px at 100% 0%, #fdf1ea 0%, transparent 55%), #f5f6fa;
+  min-height: 100vh;
+}
+
+@layer components {
+  .seg { @apply inline-flex rounded-full bg-white p-1 shadow-card ring-1 ring-black/5; }
+  .seg button { @apply rounded-full px-4 py-1.5 text-sm font-semibold text-soft transition; }
+  .seg button[aria-pressed="true"] { @apply bg-accent text-white shadow-sm; }
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[11px] font-semibold; }
+  .panel { @apply rounded-3xl bg-white/90 shadow-card ring-1 ring-black/5 backdrop-blur; }
+  .link { @apply font-semibold text-accent underline-offset-4 hover:underline; }
+  .eyebrow { @apply text-[11px] font-bold uppercase tracking-[.12em] text-soft; }
+  .card:focus-visible, button:focus-visible, a:focus-visible { @apply outline-none ring-2 ring-accent ring-offset-2; }
+}
+
+/* ---------- ветка вниз: человек сверху, ряд ниже (у нас — родители, т.е. предки) ---------- */
+.br-down { display: flex; flex-direction: column; align-items: center; }
+.br-down > .row { display: flex; position: relative; padding-top: var(--gap); }
+.br-down > .row::before { content: ""; position: absolute; left: 50%; top: 0; height: var(--gap); border-left: 1.5px solid var(--line); }
+.br-down > .row > .cell { position: relative; padding: var(--gap) 10px 0; }
+.br-down > .row > .cell::before,
+.br-down > .row > .cell::after { content: ""; position: absolute; top: 0; width: 50%; height: var(--gap); border-top: 1.5px solid var(--line); }
+.br-down > .row > .cell::before { right: 50%; }
+.br-down > .row > .cell::after { left: 50%; border-left: 1.5px solid var(--line); }
+.br-down > .row > .cell:first-child::before,
+.br-down > .row > .cell:last-child::after { border-top: 0; }
+.br-down > .row > .cell:first-child::after { border-top-left-radius: 12px; }
+.br-down > .row > .cell:last-child::before { border-right: 1.5px solid var(--line); border-top-right-radius: 12px; }
+.br-down > .row > .cell:last-child::after { border-left: 0; }
+.br-down > .row > .cell:only-child { padding-top: 0; }
+.br-down > .row > .cell:only-child::before, .br-down > .row > .cell:only-child::after { display: none; }
+
+/* ---------- ветка вверх: ряд выше, человек снизу (у нас — дети, т.е. потомки) ---------- */
+.br-up { display: flex; flex-direction: column; align-items: center; }
+.br-up > .row { display: flex; position: relative; padding-bottom: var(--gap); }
+.br-up > .row::after { content: ""; position: absolute; left: 50%; bottom: 0; height: var(--gap); border-left: 1.5px solid var(--line); }
+.br-up > .row > .cell { position: relative; padding: 0 10px var(--gap); display: flex; flex-direction: column; justify-content: flex-end; }
+.br-up > .row > .cell::before,
+.br-up > .row > .cell::after { content: ""; position: absolute; bottom: 0; width: 50%; height: var(--gap); border-bottom: 1.5px solid var(--line); }
+.br-up > .row > .cell::before { right: 50%; }
+.br-up > .row > .cell::after { left: 50%; border-left: 1.5px solid var(--line); }
+.br-up > .row > .cell:first-child::before,
+.br-up > .row > .cell:last-child::after { border-bottom: 0; }
+.br-up > .row > .cell:first-child::after { border-bottom-left-radius: 12px; }
+.br-up > .row > .cell:last-child::before { border-right: 1.5px solid var(--line); border-bottom-right-radius: 12px; }
+.br-up > .row > .cell:last-child::after { border-left: 0; }
+.br-up > .row > .cell:only-child { padding-bottom: 0; }
+.br-up > .row > .cell:only-child::before, .br-up > .row > .cell:only-child::after { display: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .card { transition: box-shadow .18s ease, transform .18s ease; }
+  .card:hover { transform: translateY(-2px); }
+}
