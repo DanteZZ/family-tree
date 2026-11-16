@@ -99,6 +99,7 @@ export const LINE_COLORS = {
   fir:  { bg: '#fde8f1', fg: '#b03a72' },
   kuk:  { bg: '#e3f6ec', fg: '#23855a' },
   pam:  { bg: '#eef5dd', fg: '#5f7a12' },
+  kuz:  { bg: '#e6eef7', fg: '#3c6491' },
 }
 export const lineColor = (l) => LINE_COLORS[l] || { bg: '#eff1f5', fg: '#6b7185' }
 export const initials = (p) => ((p.given || '?')[0] + (p.surname || '')[0] || '').replace('undefined', '')
